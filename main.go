@@ -1,13 +1,13 @@
 package main
 
 import (
-    "context"
-//    "encoding/json"
-    "fmt"
-    "io/ioutil"
-    "net/http"
+	"context"
+	//    "encoding/json"
+	"fmt"
+	"io"
+	"net/http"
 
-    "github.com/aws/aws-lambda-go/lambda"
+	"github.com/aws/aws-lambda-go/lambda"
 )
 
 // Request struct to define the incoming request format
@@ -28,7 +28,7 @@ func handler(ctx context.Context, req Request) (Response, error) {
     }
     defer resp.Body.Close()
 
-    body, err := ioutil.ReadAll(resp.Body)
+    body, err := io.ReadAll(resp.Body)
     if err != nil {
         return Response{StatusCode: 500, Body: fmt.Sprintf("Error reading response body: %s", err)}, nil
     }
@@ -37,6 +37,5 @@ func handler(ctx context.Context, req Request) (Response, error) {
 }
 
 func main() {
-    lambda.Start(handler)
+	lambda.Start(handler)
 }
-
