@@ -3,9 +3,6 @@ package main
 import (
 	"context"
 	//    "encoding/json"
-	"fmt"
-	"io"
-	"net/http"
 
 	"github.com/aws/aws-lambda-go/lambda"
 )
@@ -22,18 +19,20 @@ type Response struct {
 }
 
 func handler(ctx context.Context, req Request) (Response, error) {
-    resp, err := http.Get(req.URL)
-    if err != nil {
-        return Response{StatusCode: 500, Body: fmt.Sprintf("Error: %s", err)}, nil
-    }
-    defer resp.Body.Close()
+    // resp, err := http.Get(req.URL)
+    // if err != nil {
+    //     return Response{StatusCode: 500, Body: fmt.Sprintf("Error: %s", err)}, nil
+    // }
+    // defer resp.Body.Close()
 
-    body, err := io.ReadAll(resp.Body)
-    if err != nil {
-        return Response{StatusCode: 500, Body: fmt.Sprintf("Error reading response body: %s", err)}, nil
-    }
+    // body, err := io.ReadAll(resp.Body)
+    // if err != nil {
+    //     return Response{StatusCode: 500, Body: fmt.Sprintf("Error reading response body: %s", err)}, nil
+    // }
 
-    return Response{StatusCode: 200, Body: string(body)}, nil
+    // return Response{StatusCode: 200, Body: string(body)}, nil
+
+    return Response{StatusCode: 200, Body: "Hello, World!"}, nil
 }
 
 func main() {
